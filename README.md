@@ -22,6 +22,8 @@ Lanes follow pitch from low (left) to high (right), like a keyboard. Long notes 
 
 Every difficulty sounds like the complete song. Notes the chart leaves out are played automatically.
 
+Virtuoso is a PWA: install it from the browser ("Install app" / "Add to Home Screen"), and after the first visit it plays fully offline. The app, songs and piano samples are all precached. Icons in `public/` are generated from `public/icon.svg` with `npx @vite-pwa/assets-generator@1.0.2`.
+
 ## Setlist
 
 | # | Song | Composer | Levels (E/N/H) |
