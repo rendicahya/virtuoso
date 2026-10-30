@@ -25,6 +25,18 @@ const MAX_RINGS = 14;
 
 const JUDGE_COLOR: Record<Judge, number> = { perfect: 0xffd46b, great: 0x6be8ff, good: 0x8dffa8, miss: 0xff5a6e };
 
+const luminance = (c: THREE.Color) => 0.2126 * c.r + 0.7152 * c.g + 0.0722 * c.b;
+
+/**
+ * HSL colour dimmed so it is never brighter than a magenta of the same saturation and lightness.
+ * Without this, yellow/green/cyan song hues wash out the stage under bloom.
+ */
+function stageColor(h: number, s: number, l: number): THREE.Color {
+  const c = new THREE.Color().setHSL(((h % 1) + 1) % 1, s, l);
+  const ref = luminance(new THREE.Color().setHSL(300 / 360, s, l));
+  return c.multiplyScalar(Math.min(1, ref / Math.max(1e-6, luminance(c))));
+}
+
 function radialTexture(): THREE.Texture {
   const c = document.createElement('canvas');
   c.width = c.height = 64;
@@ -105,9 +117,9 @@ export class Stage {
     this.laneColors = Array.from({ length: L }, (_, i) =>
       new THREE.Color().setHSL((hue - 0.09 + (0.18 * i) / Math.max(1, L - 1) + 1) % 1, 0.85, 0.6),
     );
-    const accent = new THREE.Color().setHSL(hue, 0.8, 0.55);
+    const accent = stageColor(hue, 0.8, 0.55);
 
-    this.scene.fog = new THREE.Fog(new THREE.Color().setHSL(hue, 0.5, 0.03), 35, FAR + 10);
+    this.scene.fog = new THREE.Fog(stageColor(hue, 0.5, 0.03), 35, FAR + 10);
     this.scene.add(new THREE.AmbientLight(0xffffff, 0.55));
     const key = new THREE.DirectionalLight(0xffffff, 1.6);
     key.position.set(2, 9, 6);
@@ -119,8 +131,8 @@ export class Stage {
       depthWrite: false,
       fog: false,
       uniforms: {
-        uTop: { value: new THREE.Color().setHSL(hue + 0.05, 0.6, 0.02) },
-        uHorizon: { value: new THREE.Color().setHSL(hue, 0.75, 0.16) },
+        uTop: { value: stageColor(hue + 0.05, 0.6, 0.02) },
+        uHorizon: { value: stageColor(hue, 0.75, 0.16) },
         uPulse: { value: 0 },
       },
       vertexShader: `varying vec3 vDir; void main(){ vDir = normalize(position); gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`,

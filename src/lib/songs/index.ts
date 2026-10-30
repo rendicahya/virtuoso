@@ -8,13 +8,19 @@ import furElise from './furElise.ts';
 import entertainer from './entertainer.ts';
 import neonSkyline from './neonSkyline.ts';
 import rondoAllaTurca from './rondoAllaTurca.ts';
+import paperHearts from './paperHearts.ts';
+import cityLights85 from './cityLights85.ts';
+import goldenHour from './goldenHour.ts';
 
 /** Built-in setlist, roughly ordered from gentlest to most demanding. */
 export const BUILTIN_SONGS: Song[] = [
   moonlightPromise,
+  paperHearts,
   untilTheLastRain,
   gymnopedie,
   canonInD,
+  goldenHour,
+  cityLights85,
   nocturneOp9No2,
   furElise,
   entertainer,
