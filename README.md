@@ -27,17 +27,29 @@ Every difficulty sounds like the complete song. Notes the chart leaves out are p
 | # | Song | Composer | Levels (E/N/H) |
 |---|---|---|---|
 | 1 | Moonlight Promise | Original (90s slow-dance love song) | 2 / 3 / 4 |
-| 2 | Paper Hearts | Original (2010s acoustic pop) | 2 / 3 / 4 |
-| 3 | Until the Last Rain | Original (90s power-ballad style, with key change) | 2 / 3 / 4 |
-| 4 | Gymnopédie No. 1 | Satie | 1 / 2 / 3 |
-| 5 | Canon in D | Pachelbel | 3 / 5 / 6 |
-| 6 | Golden Hour | Original (2020s tropical pop) | 3 / 4 / 6 |
-| 7 | City Lights '85 | Original (80s city pop) | 3 / 5 / 6 |
-| 8 | Nocturne Op. 9 No. 2 | Chopin | 3 / 5 / 7 |
-| 9 | Für Elise | Beethoven | 3 / 7 / 8 |
-| 10 | The Entertainer | Joplin | 3 / 7 / 12 |
-| 11 | Neon Skyline | Original (modern pop style) | 3 / 7 / 12 |
-| 12 | Turkish March (Rondo alla Turca) | Mozart | 3 / 6 / 12 |
+| 2 | Gymnopédie No. 1 | Satie | 1 / 2 / 3 |
+| 3 | Moonlight Sonata (1st mvt.) | Beethoven | 1 / 2 / 3 |
+| 4 | Paper Hearts | Original (2010s acoustic pop) | 2 / 3 / 4 |
+| 5 | Until the Last Rain | Original (90s power-ballad style, with key change) | 2 / 3 / 4 |
+| 6 | Lullaby (Wiegenlied) | Brahms | 2 / 3 / 4 |
+| 7 | Prelude in E Minor, Op. 28 No. 4 | Chopin | 2 / 3 / 4 |
+| 8 | Träumerei | Schumann | 3 / 3 / 4 |
+| 9 | Pathétique Sonata (Adagio) | Beethoven | 2 / 4 / 6 |
+| 10 | Golden Hour | Original (2020s tropical pop) | 3 / 4 / 6 |
+| 11 | Clair de Lune | Debussy | 3 / 4 / 8 |
+| 12 | Canon in D | Pachelbel | 3 / 5 / 6 |
+| 13 | City Lights '85 | Original (80s city pop) | 3 / 5 / 6 |
+| 14 | Minuet in G | Petzold (attr. Bach) | 3 / 5 / 7 |
+| 15 | Nocturne Op. 9 No. 2 | Chopin | 3 / 5 / 7 |
+| 16 | Für Elise | Beethoven | 3 / 7 / 8 |
+| 17 | Prelude in C Major, BWV 846 | Bach | 3 / 7 / 8 |
+| 18 | Sonata in C, K. 545 (1st mvt.) | Mozart | 3 / 6 / 11 |
+| 19 | Turkish March (Rondo alla Turca) | Mozart | 3 / 6 / 12 |
+| 20 | Minute Waltz | Chopin | 3 / 6 / 12 |
+| 21 | The Entertainer | Joplin | 3 / 7 / 12 |
+| 22 | Neon Skyline | Original (modern pop style) | 3 / 7 / 12 |
+| 23 | In the Hall of the Mountain King | Grieg | 3 / 7 / 12 |
+| 24 | Maple Leaf Rag | Joplin | 3 / 8 / 12 |
 
 ### Adding your own songs
 
@@ -59,4 +71,7 @@ seq('E5:1 D#5 E5 B4 D5 C5 | A4:2 r:1 C4:1 E4 A4 |', { unit: 0.25, bar: 1.5 })
 
 - Piano samples: [Salamander Grand Piano](https://archive.org/details/SalamanderGrandPianoV3) by Alexander Holm, CC-BY 3.0, via [Tone.js](https://github.com/Tonejs/audio).
 - Classical pieces are in the public domain.
-- The Entertainer, Turkish March, Gymnopédie No. 1 and Nocturne Op. 9 No. 2 are converted from [Mutopia Project](https://www.mutopiaproject.org/) MIDI editions. The first three are public domain. The Nocturne edition is licensed [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), so its derived data (`src/lib/songs/data/nocturneOp9No2.json`) is shared under the same license. "Moonlight Promise", "Paper Hearts", "Until the Last Rain", "Golden Hour", "City Lights '85" and "Neon Skyline" are original compositions for this project.
+- Every piece with a file in `scripts/midi/` is converted from a [Mutopia Project](https://www.mutopiaproject.org/) MIDI edition. Most are public domain. Three editions carry Creative Commons licenses, so their derived data in `src/lib/songs/data/` is shared under the same license:
+  - Nocturne Op. 9 No. 2 (`nocturneOp9No2.json`), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)
+  - Sonata K. 545 (`sonataK545.json`), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)
+  - Clair de Lune (`clairDeLune.json`), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) "Moonlight Promise", "Paper Hearts", "Until the Last Rain", "Golden Hour", "City Lights '85" and "Neon Skyline" are original compositions for this project.

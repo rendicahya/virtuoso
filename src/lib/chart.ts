@@ -86,11 +86,16 @@ export function buildChart(data: SongData, difficulty: Difficulty): Chart {
   }
 
   // Map pitch rank to lanes so the melody's contour reads left (low) to right (high), like a keyboard.
-  const uniq = [...new Set(kept.flat().map((n) => n.midi))].sort((a, b) => a - b);
-  const rank = new Map(uniq.map((m, i) => [m, i]));
-  const U = uniq.length;
-  const laneFor = (midi: number) => {
-    const r = rank.get(midi)!;
+  // Ranks come from the pitches within a few seconds, so a melody that climbs or drops by octaves
+  // over the song still spreads across every lane.
+  const RANK_WINDOW = 6;
+  const flat = kept.flat();
+  const laneFor = (midi: number, t: number) => {
+    const uniq = [...new Set(flat.filter((n) => Math.abs(n.t - t) <= RANK_WINDOW).map((n) => n.midi))].sort(
+      (a, b) => a - b,
+    );
+    const r = uniq.indexOf(midi);
+    const U = uniq.length;
     return U <= L ? Math.round((r * (L - 1)) / Math.max(1, U - 1)) : Math.min(L - 1, Math.floor((r * L) / U));
   };
 
@@ -103,7 +108,7 @@ export function buildChart(data: SongData, difficulty: Difficulty): Chart {
       // Bass notes ring through the pedal, so they're always taps.
       const hold = n.d >= holdMin && !bassNotes.has(n);
       const end = hold ? n.t + Math.max(0.3, n.d - 0.1) : n.t;
-      const want = laneFor(n.midi);
+      const want = laneFor(n.midi, n.t);
       // Nearest free lane, preferring the natural direction for lower chord tones.
       let lane = -1;
       for (let k = 0; k < L && lane < 0; k++) {
