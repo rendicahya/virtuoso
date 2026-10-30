@@ -1,0 +1,30 @@
+import type { Ev, Note, Song, SongData, SongMeta } from '../types.ts';
+
+const byTime = (a: Note, b: Note) => a.t - b.t || b.midi - a.midi;
+
+export function defineSong(meta: SongMeta, build: () => { melody: Ev[]; accomp: Ev[] }): Song {
+  let cache: SongData | null = null;
+  return {
+    ...meta,
+    load() {
+      if (cache) return cache;
+      const spb = 60 / meta.bpm;
+      const conv = (e: Ev): Note => ({ t: e.beat * spb, d: e.beats * spb, midi: e.midi, v: e.vel });
+      const { melody, accomp } = build();
+      const player = melody.map(conv).sort(byTime);
+      const acc = accomp.map(conv).sort(byTime);
+      const duration = Math.max(...[...player, ...acc].map((n) => n.t + Math.min(n.d, 2.5)));
+      const bars: number[] = [];
+      for (let t = meta.barOffset * spb; t <= duration; t += meta.beatsPerBar * spb) bars.push(t);
+      cache = {
+        player,
+        accomp: acc,
+        duration,
+        bars,
+        bpm: meta.bpm,
+        previewAt: (meta.previewBeat ?? 0) * spb,
+      };
+      return cache;
+    },
+  };
+}
