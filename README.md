@@ -28,13 +28,18 @@ Every difficulty sounds like the complete song. Notes the chart leaves out are p
 |---|---|---|---|
 | 1 | Moonlight Promise | Original (90s slow-dance love song) | 2 / 3 / 4 |
 | 2 | Until the Last Rain | Original (90s power-ballad style, with key change) | 2 / 3 / 4 |
-| 3 | Canon in D | Pachelbel | 3 / 5 / 6 |
-| 4 | Für Elise | Beethoven | 3 / 7 / 8 |
-| 5 | Neon Skyline | Original (modern pop style) | 3 / 7 / 12 |
+| 3 | Gymnopédie No. 1 | Satie | 1 / 2 / 3 |
+| 4 | Canon in D | Pachelbel | 3 / 5 / 6 |
+| 5 | Nocturne Op. 9 No. 2 | Chopin | 3 / 5 / 7 |
+| 6 | Für Elise | Beethoven | 3 / 7 / 8 |
+| 7 | The Entertainer | Joplin | 3 / 7 / 12 |
+| 8 | Neon Skyline | Original (modern pop style) | 3 / 7 / 12 |
+| 9 | Turkish March (Rondo alla Turca) | Mozart | 3 / 6 / 12 |
 
 ### Adding your own songs
 
 - **In the game:** use **Import MIDI** on the song-select screen. Pick the melody track; the other tracks become the accompaniment. Turn on "top voice" for single-track piano MIDIs. Imports are saved in the browser's localStorage.
+- **From a MIDI file, built in:** put the file in `scripts/midi/`, add an entry to `SONGS` in `scripts/midi-to-song.mjs`, run `node scripts/midi-to-song.mjs`, then add a small song file like `src/lib/songs/gymnopedie.ts`.
 - **In code:** add a file in `src/lib/songs/` using the compact notation in `src/lib/notation.ts`, then register it in `src/lib/songs/index.ts`.
 
 ```ts
@@ -50,4 +55,5 @@ seq('E5:1 D#5 E5 B4 D5 C5 | A4:2 r:1 C4:1 E4 A4 |', { unit: 0.25, bar: 1.5 })
 ## Credits
 
 - Piano samples: [Salamander Grand Piano](https://archive.org/details/SalamanderGrandPianoV3) by Alexander Holm, CC-BY 3.0, via [Tone.js](https://github.com/Tonejs/audio).
-- Classical pieces are in the public domain. "Moonlight Promise", "Until the Last Rain" and "Neon Skyline" are original compositions for this project.
+- Classical pieces are in the public domain.
+- The Entertainer, Turkish March, Gymnopédie No. 1 and Nocturne Op. 9 No. 2 are converted from [Mutopia Project](https://www.mutopiaproject.org/) MIDI editions. The first three are public domain. The Nocturne edition is licensed [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), so its derived data (`src/lib/songs/data/nocturneOp9No2.json`) is shared under the same license. "Moonlight Promise", "Until the Last Rain" and "Neon Skyline" are original compositions for this project.

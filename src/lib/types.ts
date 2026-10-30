@@ -14,7 +14,7 @@ export interface Note {
   v: number;
 }
 
-export type SongTag = 'Classical' | 'Traditional' | 'Original' | 'Imported';
+export type SongTag = 'Classical' | 'Ragtime' | 'Traditional' | 'Original' | 'Imported';
 
 export interface SongMeta {
   id: string;
